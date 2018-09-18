@@ -1,0 +1,4 @@
+*.log
+.idea/
+bower_components/
+node_modules/
