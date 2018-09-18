@@ -22,9 +22,16 @@ gulp.task('embed-pricing', function () {
         .pipe(gulp.dest('./www/js/pricing'));
 });
 
+gulp.task('embed-plan', function () {
+    gulp.src('./www/js/plan/directive/*.js')
+        .pipe(embedTemplates())
+        .on('error', errorWarning)
+        .pipe(gulp.dest('./www/js/plan'));
+});
+
 gulp.task('embed', [
-    'embed-pricing'
-    // Add additional directives here
+    'embed-pricing',
+    'embed-plan'
 ]);
 
 gulp.task('sass', function() {

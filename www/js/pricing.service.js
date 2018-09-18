@@ -1,91 +1,65 @@
 (function() {
     'use strict';
 
-    angular.module('myApp').service('UserService', UserService);
+    angular.module('myApp').service('PricingService', PricingService);
 
-    UserService.$inject = [
-        'DataManagementService',
-        'DefaultVariableService',
-        'EnvironmentService',
-        'LoginService',
-        'RequestManagementService'
+    PricingService.$inject = [
+        '$q'
     ];
 
-    function UserService(
-        DataManagementService,
-        DefaultVariableService,
-        EnvironmentService,
-        LoginService,
-        RequestManagementService
+    function PricingService(
+        $q
     ) {
-        var UserService = this;
+        var PricingService = this;
 
-        UserService.getUser = getUser;
-        function getUser(user) {
-            if (!DefaultVariableService.isObject(user)) {
-                var userId = EnvironmentService.get('user_id');
-                if (userId) {
-                    user = {
-                        id: userId
-                    };
-                } else {
-                    return LoginService.getActiveUser().then(
-                        function(activeUser) {
-                            if (activeUser) {
-                                return UserService.getUser(activeUser);
-                            }
-
-                            return false;
-                        }
-                    );
+        PricingService.getPlans = getPlans;
+        function getPlans() {
+            var plans = [
+                {
+                    title: 'Free',
+                    price: 0,
+                    num_of_users: 10,
+                    gigabytes: 10,
+                    additional: [
+                        'Email support',
+                        'Help center access'
+                    ],
+                    button_text: 'Sign up for free'
+                },
+                {
+                    title: 'Pro',
+                    price: 15,
+                    num_of_users: 20,
+                    gigabytes: 10,
+                    additional: [
+                        'Priority email support',
+                        'Help center access'
+                    ],
+                    button_text: 'Get started'
+                },
+                {
+                    title: 'Enterprise',
+                    price: 29,
+                    num_of_users: 30,
+                    gigabytes: 15,
+                    additional: [
+                        'Phone and email support',
+                        'Help center access'
+                    ],
+                    button_text: 'Contact us'
                 }
-            }
+            ];
 
-            return UserService.loadUser(user);
+            return $q.resolve(plans);
         }
-
-        UserService.loadUser = loadUser;
-        function loadUser(user) {
-            var options = RequestManagementService.getRequest();
-
-            options = RequestManagementService.setModel(options, 'users');
-            options = RequestManagementService.setAction(options, 'get', user.id);
-
-            options = RequestManagementService.setParams(
-                options,
-                [
-                    'Images',
-                    'Locations.States',
-                    'Tags',
-                    'UserTypes'
-                ]
-            );
-
-            return DataManagementService.request(options).then(
-                function(data) {
-                    if (data) {
-                        var users = DefaultVariableService.getArray(
-                            data.users
-                        );
-
-                        if (users.length !== 0) {
-                            return users[0];
-                        }
-                    }
-
-                    return false;
-                }
-            );
-        }
-
-
-        UserService.reset = reset;
+        
+        PricingService.reset = reset;
         function reset() {
 
         }
 
-        UserService.reset();
+        PricingService.reset();
 
-        return UserService;
+        return PricingService;
     }
 })();

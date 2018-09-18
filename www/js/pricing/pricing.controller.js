@@ -7,63 +7,36 @@
     );
 
     PricingController.$inject = [
-        'DefaultVariableService',
-        'EnvironmentService',
-        'UserDurationService',
-        'UserService'
+        'PricingService'
     ];
 
     function PricingController(
-        DefaultVariableService,
-        EnvironmentService,
-        UserDurationService,
-        UserService
+        PricingService
     ) {
         var PricingController = this;
-
-        PricingController.user = DefaultVariableService.getObject();
         
-        PricingController.loadUser = loadUser;
-        function loadUser() {
-            return UserService.getUser().then(
-                function(user) {
-                    if (user) {
-                        PricingController.weeks = UserDurationService.getWeeks(user);
-
-                        PricingController.totalWeeks = EnvironmentService.get(
-                            'totalWeeks',
-                            1
-                        );
-
-                        PricingController.percent = PricingController.weeks / PricingController.totalWeeks * 100;
-                        if (PricingController.percent > 100) {
-                            PricingController.percent = 100;
-                        }
+        PricingController.loadPlans = loadPlans;
+        function loadPlans() {
+            return PricingService.getPlans().then(
+                function(plans) {
+                    if (plans) {
+                        PricingController.plans = plans;
                     }
 
-                    return user;
+                    return plans;
                 }
             );
         }
 
         PricingController.reset = reset;
         function reset() {
-            PricingController.percent = 0;
-
-            PricingController.title = DefaultVariableService.getString(
-                PricingController.title,
-                'PROGRAM PROGRESSION'
-            );
-
-            PricingController.totalWeeks = 1;
-
-            PricingController.weeks = 0;
+            PricingController.plans = [];
         }
 
         PricingController.init = init;
         function init() {
             PricingController.reset();
-            PricingController.loadUser();
+            PricingController.loadPlans();
         }
 
         PricingController.init();
