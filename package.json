@@ -21,7 +21,7 @@
     "babel-core": "^6.26.3",
     "babelify": "^10.0.0",
     "browser-sync": "^2.24.7",
-    "browserify": "^16.2.2",
+    "browserify": "^16.2.3",
     "browserify-resolutions": "^1.1.0",
     "buffer": "^5.2.1",
     "gulp": "^3.9.1",
