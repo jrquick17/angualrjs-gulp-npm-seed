@@ -1,3 +1,11 @@
+/**
+ * @description A seed start to a gulp project supporting SASS/SCSS compilation, linting, embedding angular directives, javascript minification, bundling, and launching servers and proxies right out of the box.
+ *
+ * @source https://github.com/jrquick17/gulp-seed
+ * @author Jeremy Quick <me@jrquick.com>
+ * @website http://jrquick.com
+ * @license unlicense
+ */
 var gulp = require('gulp');
 
 var babel = require('babelify');
