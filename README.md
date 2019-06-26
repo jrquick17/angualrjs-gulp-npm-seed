@@ -1,13 +1,14 @@
-## Synopsis
+## About
 
 A seed for quickly starting an AngularJS project using Gulp and NPM.
  
 Technologies
 * AngularJS (1.7+)
-* Bootstrap (4.1+)
 * Gulp (3.9+)
 * NPM
 * SASS (4.0+)
+
+* Visit [my website](https://jrquick.com) for me cool stuff!
 
 ## Getting Started
 
