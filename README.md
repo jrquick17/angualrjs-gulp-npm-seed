@@ -1,7 +1,8 @@
 # angularjs-gulp-npm-seed
   
-<div style="max-width: 300px; text-align:center;">
-    <img src="logo.png"/>
+<div style="text-align:center;">
+    <img style="max-width: 300px;"
+         src="logo.png"/>
 </div>
 
 ## Index ##
