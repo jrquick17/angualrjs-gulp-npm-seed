@@ -1,6 +1,8 @@
 # angularjs-gulp-npm-seed
   
-![](logo.png =250x250)
+<div style="max-width: 300px; text-align:center;">
+    <img src="logo.png"/>
+</div>
 
 ## Index ##
 
